@@ -1,1 +1,1 @@
-# hashmap
+A simple hashmap factory function.
