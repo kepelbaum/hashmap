@@ -40,7 +40,60 @@ function hashMap () {
         }) 
         return temp;
     }
-    return {getList, hash, set, get};
+    function has(key) {
+        let hashCode = hash(key);
+        let temp = false;
+        list[hashCode].forEach((obj) => {
+            if (obj.key === key) {
+                temp = true;
+            }
+        }) 
+        return temp;
+    }
+    function remove(key) {
+        let hashCode = hash(key);
+        let temp = false;
+        for (let i = 0; i < list[hashCode].length; i++) {
+            if (list[hashCode][i].key === key) {
+                temp = true;
+                list[hashCode].splice(i, 1);
+                break;
+            }
+        }
+        return temp;
+    }
+    function length() {
+        let len = 0;
+        for (i = 0; i < 16; i++) {
+            list[i].forEach((obj) => len++);
+        }
+        return len;
+    }
+    function clear() {
+        list = init();
+    }
+    function keys() {
+        let arr = [];
+        for (i = 0; i < 16; i++) {
+            list[i].forEach((obj) => arr.push(obj.key));
+        }
+        return arr;
+    }
+    function values() {
+        let arr = [];
+        for (i = 0; i < 16; i++) {
+            list[i].forEach((obj) => arr.push(obj.value));
+        }
+        return arr;
+    }
+    function entries() {
+        let arr = [];
+        for (i = 0; i < 16; i++) {
+            list[i].forEach((obj) => arr.push([obj.key, obj.value]));
+        }
+        return arr;
+    }
+    return {getList, hash, set, get, has, remove, length, clear, keys, values, entries};
 }
 
 let main = hashMap();
@@ -48,6 +101,14 @@ let main = hashMap();
 main.set('Carlos', 'I am the old value');
 // console.log(main.getList());
 main.set('Carlos', 'I am the new value');
-console.log(main.getList());
-console.log(main.get('Bob'), main.get('Carlos'));
+main.set('Bob', 'hehe');
+// console.log(main.getList());
+// console.log(main.get('Bob'), main.get('Carlos'));
+// console.log(main.has('Bob'), main.has('Carlos'));
+// main.remove('Bob');
+// main.clear();
+console.log(main.length());
+// console.log(main.keys(), main.values());
+console.log(main.entries());
+
 
